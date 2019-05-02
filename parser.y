@@ -33,14 +33,12 @@ int count;
 {
   CharPtr iden;
   Operators oper;
-  int value;
+  double value;
 
 }
 
 %token <iden> IDENTIFIER
-%token <value> INT_LITERAL
-%token <value> REAL_LITERAL
-%token <value> BOOL_LITERAL
+%token <value> INT_LITERAL REAL_LITERAL BOOL_LITERAL
 
 
 %token <oper> ADDOP MULOP RELOP EXPOP REMOP
