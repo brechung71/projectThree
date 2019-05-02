@@ -17,11 +17,11 @@ using namespace std;
 int yylex();
 void yyerror(const char* message);
 
-Symbols <int> symbols;
+Symbols <double> symbols;
 
 int result;
 double * args;
-int count;
+int counter;
 
 
 
@@ -62,7 +62,7 @@ function_header:
 
 optional_variable:
 	optional_variable variable |
-	;
+	  %empty ;
 
 variable:
 	IDENTIFIER ':' type IS statement_ {symbols.insert($1, $5);} ;
@@ -77,7 +77,7 @@ parameters:
     parameter ;
 
 parameter:
-  IDENTIFIER ':' type {symbols.insert($1, args[count]); count++;} ;
+  IDENTIFIER ':' type {symbols.insert($1, args[counter]), counter++;} ;
 
 
 type: INTEGER | REAL |
@@ -160,7 +160,7 @@ void yyerror(const char* message)
 int main(int argc, char *argv[])
 {
   args = new double[argc-1];
-  count = 0;
+  counter = 0;
 
   for (int j = 0; j < argc-1; j++)
   {
